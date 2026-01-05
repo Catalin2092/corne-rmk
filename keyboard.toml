@@ -1,37 +1,79 @@
 # Documentation: https://haobogu.github.io/rmk/keyboard_configuration.html
 [keyboard]
-name = "RMK Keyboard"
-product_name = "RMK Keyboard"
+name = "corne-rmk"
+product_name = "corne_bt"
 vendor_id = 0x4c4b
 product_id = 0x4643
-manufacturer = "haobo"
-chip = "rp2040"
-
-[matrix]
-# Input and output pins are mandatory
-input_pins = ["PIN_6", "PIN_7", "PIN_8", "PIN_9"]
-output_pins = ["PIN_19", "PIN_20", "PIN_21"]
-# WARNING: Currently row2col/col2row is set in RMK's feature gate, configs here do nothing actually
-# row2col = true
+manufacturer = "rmk"
+chip = "nrf52840"
 
 [layout]
 rows = 4
-cols = 3
-layers = 2
-keymap = [
-    [
-        ["A", "B", "C"],
-        ["Kc1", "Kc2", "Kc3"],
-        ["LCtrl", "MO(1)", "LShift"],
-        ["OSL(1)", "LT(2, Kc9)", "LM(1, LShift | LGui)"]
-    ],
-    [
-        ["_", "TT(1)", "TG(2)"],
-        ["_", "_", "_"],
-        ["_", "_", "_"],
-        ["_", "_", "_"]
-    ],
-]
+cols = 6
+layers = 3
+matrix_map = """
+(0,0) (0,1) (0,2) (0,3) (0,4) (0,5) (0,6) (0,7) (0,8) (0,9) (0,10) (0,11)
+(1,0) (1,1) (1,2) (1,3) (1,4) (1,5) (1,6) (1,7) (1,8) (1,9) (1,10) (1,11)
+(2,0) (2,1) (2,2) (2,3) (2,4) (2,5) (2,6) (2,7) (2,8) (2,9) (2,10) (2,11)
+            (3,3) (3,4) (3,5) (3,6) (3,7) (3,8) 
+"""
+
+[[layer]]
+name = "BaseLayer" #optional name for the layer
+keys = """
+Tab          Q    W                E     R     T                        Y U I     O P Backspace
+Escape       A    S                D     F     G                        H J K     L ; '
+LShift       Z    X                C     V     B                        N M Comma . / LAlt
+             LGui LT(LowerLayer,/) Space Enter LT(UpperLayer,Backspace) LCtrl
+"""
+
+[[layer]]
+name = "LowerLayer" #optional name for the layer
+keys = """
+Tab          1    2 3     4     5 6    7    8  9     0 Backspace
+_            _    _ _     _     _ Left Down Up Right _
+_            _    _ _     _     _ _    _    _  _     _ _
+             LGui _ Space Enter _ RAlt
+"""
+
+[[layer]]
+name = "UpperLayer" #optional name for the layer
+keys = """
+Tab       1    2 3     4     5 6 7 8 9 0 Backspace
+_         _    _ _     _     _ _ _ _ _ _ _
+_         _    _ _     _     _ _ _ _ _ _ _
+          LGui _ Space Enter _ RAlt
+"""
+
+[ble]
+enabled = true
+
+[split]
+connection = "ble"
+
+[storage]
+enabled = true
+clear_storage = true
+
+[split.central]
+rows = 4
+cols = 6
+row_offset = 0
+col_offset = 0
+ble_addr = [0x18, 0xe2, 0x21, 0x80, 0xc0, 0xc7]
+[split.central.matrix]
+input_pins = ["P0_22", "P0_24", "P1_00", "P0_11"]
+output_pins = ["P1_11", "P1_13", "P1_15", "P0_02", "P0_29", "P0_31"]
+
+[[split.peripheral]]
+rows = 4
+cols = 6
+row_offset = 0
+col_offset = 6
+ble_addr = [0x7e, 0xfe, 0x73, 0x9e, 0x66, 0xe3]
+[split.peripheral.matrix]
+input_pins = ["P0_22", "P0_24", "P1_00", "P0_11"]
+output_pins = ["P1_11", "P1_13", "P1_15", "P0_02", "P0_29", "P0_31"]
 
 [light]
 # All light pins are high-active by default, uncomment if you want it to be low-active
