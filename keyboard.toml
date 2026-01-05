@@ -62,9 +62,10 @@ row_offset = 0
 col_offset = 0
 ble_addr = [0x18, 0xe2, 0x21, 0x80, 0xc0, 0xc7]
 
+# Use row_pins and col_pins instead of input_pins/output_pins
 [split.central.matrix]
-input_pins = ["P0_22", "P0_24", "P1_00", "P0_11"]
-output_pins = ["P1_11", "P1_13", "P1_15", "P0_02", "P0_29", "P0_31"]
+row_pins = ["P0_22", "P0_24", "P1_00", "P0_11"]
+col_pins = ["P1_11", "P1_13", "P1_15", "P0_02", "P0_29", "P0_31"]
 
 [[split.peripheral]]
 rows = 4
@@ -73,9 +74,10 @@ row_offset = 0
 col_offset = 6
 ble_addr = [0x7e, 0xfe, 0x73, 0x9e, 0x66, 0xe3]
 
+# Use row_pins and col_pins instead of input_pins/output_pins
 [split.peripheral.matrix]
-input_pins = ["P0_22", "P0_24", "P1_00", "P0_11"]
-output_pins = ["P1_11", "P1_13", "P1_15", "P0_02", "P0_29", "P0_31"]
+row_pins = ["P0_22", "P0_24", "P1_00", "P0_11"]
+col_pins = ["P1_11", "P1_13", "P1_15", "P0_02", "P0_29", "P0_31"]
 
 [light]
 # All light pins are high-active by default, uncomment if you want it to be low-active
